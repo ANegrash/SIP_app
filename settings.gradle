@@ -1,0 +1,2 @@
+rootProject.name = "Crimea Aero"
+include ':app'
