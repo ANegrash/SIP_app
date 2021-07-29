@@ -1,4 +1,4 @@
-package ru.navapps.crimeaaero
+package ru.navapps.crimeaaero.entities
 
 import android.os.Build
 import androidx.annotation.RequiresApi
