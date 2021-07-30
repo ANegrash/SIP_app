@@ -1,10 +1,10 @@
 package ru.navapps.crimeaaero
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ru.navapps.crimeaaero.entities.FlightModel
 
 class FlightList (inflater: LayoutInflater, parent: ViewGroup):
     RecyclerView.ViewHolder(inflater.inflate(R.layout.list_element, parent, false)) {

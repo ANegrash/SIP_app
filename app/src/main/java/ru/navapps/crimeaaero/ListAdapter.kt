@@ -3,6 +3,7 @@ package ru.navapps.crimeaaero
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.navapps.crimeaaero.entities.FlightModel
 
 class ListAdapter(private val list: List<FlightModel>)
     : RecyclerView.Adapter<FlightList>() {

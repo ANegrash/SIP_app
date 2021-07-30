@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.navapps.crimeaaero.entities.FlightModel
 
 class ActivityList : AppCompatActivity() {
     private val listOfObjects = listOf(
