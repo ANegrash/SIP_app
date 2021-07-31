@@ -6,73 +6,155 @@
     android:layout_height="match_parent"
     tools:context=".ActivityList">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/teal_200"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/teal_200"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:orientation="vertical">-->
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/russian"
-                android:text="Направление:"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textView"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_weight="1"-->
+    <!--                    android:fontFamily="@font/russian"-->
+    <!--                    android:text="Направление:"-->
+    <!--                    android:textColor="@color/black"-->
+    <!--                    android:textStyle="bold" />-->
 
-            <Spinner
-                android:id="@+id/spinner_flightTypes"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:entries="@array/flightTypes" />
-        </LinearLayout>
+    <!--                <Spinner-->
+    <!--                    android:id="@+id/spinner_flightTypes"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="40dp"-->
+    <!--                    android:layout_weight="1"-->
+    <!--                    android:entries="@array/flightTypes" />-->
+    <!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:orientation="vertical">-->
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/russian"
-                android:text="День:"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+    <!--                <TextView-->
+    <!--                    android:id="@+id/textView2"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_weight="1"-->
+    <!--                    android:fontFamily="@font/russian"-->
+    <!--                    android:text="День:"-->
+    <!--                    android:textColor="@color/black"-->
+    <!--                    android:textStyle="bold" />-->
 
-            <Spinner
-                android:id="@+id/spinner_dates"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:entries="@array/dates" />
-        </LinearLayout>
+    <!--                <Spinner-->
+    <!--                    android:id="@+id/spinner_dates"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="40dp"-->
+    <!--                    android:layout_weight="1"-->
+    <!--                    android:entries="@array/dates" />-->
+    <!--        </LinearLayout>-->
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_flightList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/constraintlayout_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView_flightList">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_menu_item1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/constraintlayout_menu"
+            app:layout_constraintEnd_toStartOf="@id/constraintlayout_menu_item2"
+            app:layout_constraintStart_toStartOf="@id/constraintlayout_menu"
+            app:layout_constraintTop_toTopOf="@id/constraintlayout_menu">
+
+            <TextView
+                android:id="@+id/textView_menu_item1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/russian"
+                android:paddingStart="5dp"
+                android:paddingLeft="5dp"
+                android:text="@string/direction"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/spinner_flightTypes"
+                app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item1"
+                app:layout_constraintTop_toTopOf="@id/constraintlayout_menu_item1" />
+
+            <Spinner
+                android:id="@+id/spinner_flightTypes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/flightTypes"
+                app:layout_constraintBottom_toBottomOf="@id/textView_menu_item1"
+                app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item1"
+                app:layout_constraintTop_toBottomOf="@id/textView_menu_item1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_menu_item2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/constraintlayout_menu"
+            app:layout_constraintEnd_toEndOf="@id/constraintlayout_menu"
+            app:layout_constraintStart_toEndOf="@id/constraintlayout_menu_item1"
+            app:layout_constraintTop_toTopOf="@id/constraintlayout_menu">
+
+            <TextView
+                android:id="@+id/textView_menu_item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/russian"
+                android:paddingStart="5dp"
+                android:paddingLeft="5dp"
+                android:text="@string/day"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/spinner_dates"
+                app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item2"
+                app:layout_constraintTop_toTopOf="@id/constraintlayout_menu_item2" />
+
+            <Spinner
+                android:id="@+id/spinner_dates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/dates"
+                app:layout_constraintBottom_toBottomOf="@id/textView_menu_item2"
+                app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item2"
+                app:layout_constraintTop_toBottomOf="@id/textView_menu_item2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
