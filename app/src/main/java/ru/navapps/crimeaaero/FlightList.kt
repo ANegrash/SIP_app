@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.navapps.crimeaaero.entities.FlightModel
 
-class FlightList (inflater: LayoutInflater, parent: ViewGroup):
+class FlightList(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.list_element, parent, false)) {
     private var timeTextView: TextView? = null
     private var cityTextViev: TextView? = null

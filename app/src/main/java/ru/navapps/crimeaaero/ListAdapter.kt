@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.navapps.crimeaaero.entities.FlightModel
 
-class ListAdapter(private val list: List<FlightModel>)
-    : RecyclerView.Adapter<FlightList>() {
+class ListAdapter(private val list: List<FlightModel>) : RecyclerView.Adapter<FlightList>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlightList {
         val inflater = LayoutInflater.from(parent.context)
