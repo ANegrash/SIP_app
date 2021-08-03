@@ -1,8 +1,5 @@
 <resources>
-    <string name="app_name">Crimea Aero</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">SIP aero</string>
     <string name="direction">Направление:</string>
     <string name="day">День:</string>
     <string-array name="dates">

@@ -25,6 +25,6 @@ class FlightList(inflater: LayoutInflater, parent: ViewGroup) :
         timeTextView?.text = flight.dateTime
         cityTextViev?.text = flight.direction
         statusTextViev?.text = flight.status
-        numberTextViev?.text = flight.flightNumberString
+        numberTextViev?.text = flight.flight
     }
 }

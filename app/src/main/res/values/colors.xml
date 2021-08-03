@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="secondary">#716F6F</color>
     <color name="warning">#FF0000</color>
+    <color name="lightBlue">#38B6FF</color>
 </resources>

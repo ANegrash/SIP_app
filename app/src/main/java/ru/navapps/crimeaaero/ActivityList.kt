@@ -5,10 +5,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import ru.navapps.crimeaaero.entities.FlightModel
+import ru.navapps.crimeaaero.entities.JsonObject
 import java.io.IOException
 
 class ActivityList : AppCompatActivity() {
@@ -38,7 +40,16 @@ class ActivityList : AppCompatActivity() {
                 override fun onResponse(call: Call, response: Response) {
                     val listOfObjects: ArrayList<FlightModel> = arrayListOf()
                     val responseString = response.body()!!.string()
-                    //var json = Gson().fromJson(responseString, FlightModel::class.java)
+                    val json : JsonObject? = Gson().fromJson(responseString, JsonObject::class.java)
+                    if (json != null) {
+                        for (i in json.departure?.yesterday!!) {
+                            listOfObjects.add(i)
+                        }
+                    }
+
+                    for (k in listOfObjects){
+                        k.dateTime = getTimeFromDate(k.dateTime)
+                    }
                     this@ActivityList.runOnUiThread(Runnable() {
                         run() {
                             val recyclerView: RecyclerView =

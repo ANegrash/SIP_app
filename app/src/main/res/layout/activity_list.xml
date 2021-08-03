@@ -6,79 +6,83 @@
     android:layout_height="match_parent"
     tools:context=".ActivityList">
 
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/linearLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@color/teal_200"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent">-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:orientation="vertical">-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightBlue"
+            android:minHeight="?attr/actionBarSize">
 
-    <!--                <TextView-->
-    <!--                    android:id="@+id/textView"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:fontFamily="@font/russian"-->
-    <!--                    android:text="Направление:"-->
-    <!--                    android:textColor="@color/black"-->
-    <!--                    android:textStyle="bold" />-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <!--                <Spinner-->
-    <!--                    android:id="@+id/spinner_flightTypes"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="40dp"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:entries="@array/flightTypes" />-->
-    <!--        </LinearLayout>-->
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/logo" />
 
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:orientation="vertical">-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/russian"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-    <!--                <TextView-->
-    <!--                    android:id="@+id/textView2"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:fontFamily="@font/russian"-->
-    <!--                    android:text="День:"-->
-    <!--                    android:textColor="@color/black"-->
-    <!--                    android:textStyle="bold" />-->
+                <ImageButton
+                    android:id="@+id/btn_reloadTable"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@android:drawable/stat_notify_sync" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--                <Spinner-->
-    <!--                    android:id="@+id/spinner_dates"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="40dp"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:entries="@array/dates" />-->
-    <!--        </LinearLayout>-->
 
-    <!--    </LinearLayout>-->
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_flightList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/constraintlayout_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintlayout_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/lightBlue"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +93,7 @@
             android:id="@+id/constraintlayout_menu_item1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="@id/constraintlayout_menu"
             app:layout_constraintEnd_toStartOf="@id/constraintlayout_menu_item2"
             app:layout_constraintStart_toStartOf="@id/constraintlayout_menu"
@@ -102,8 +107,8 @@
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:text="@string/direction"
-                android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/spinner_flightTypes"
                 app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item1"
@@ -111,10 +116,11 @@
 
             <Spinner
                 android:id="@+id/spinner_flightTypes"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:entries="@array/flightTypes"
                 app:layout_constraintBottom_toBottomOf="@id/textView_menu_item1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item1"
                 app:layout_constraintTop_toBottomOf="@id/textView_menu_item1" />
 
@@ -124,6 +130,7 @@
             android:id="@+id/constraintlayout_menu_item2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="@id/constraintlayout_menu"
             app:layout_constraintEnd_toEndOf="@id/constraintlayout_menu"
             app:layout_constraintStart_toEndOf="@id/constraintlayout_menu_item1"
@@ -137,8 +144,8 @@
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:text="@string/day"
-                android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/spinner_dates"
                 app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item2"
@@ -146,10 +153,11 @@
 
             <Spinner
                 android:id="@+id/spinner_dates"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:entries="@array/dates"
                 app:layout_constraintBottom_toBottomOf="@id/textView_menu_item2"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/constraintlayout_menu_item2"
                 app:layout_constraintTop_toBottomOf="@id/textView_menu_item2" />
 
