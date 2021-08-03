@@ -2,14 +2,4 @@
     <string name="app_name">SIP aero</string>
     <string name="direction">Направление:</string>
     <string name="day">День:</string>
-    <string-array name="dates">
-        <item>Вчера</item>
-        <item>Сегодня</item>
-        <item>Завтра</item>
-    </string-array>
-    <string-array name="flightTypes">
-        <item>Вылет</item>
-        <item>Прилёт</item>
-        <item>Все рейсы</item>
-    </string-array>
 </resources>
