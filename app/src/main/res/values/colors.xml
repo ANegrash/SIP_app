@@ -10,4 +10,5 @@
     <color name="secondary">#716F6F</color>
     <color name="warning">#FF0000</color>
     <color name="lightBlue">#38B6FF</color>
+    <color name="gray">#EDEEF0</color>
 </resources>
