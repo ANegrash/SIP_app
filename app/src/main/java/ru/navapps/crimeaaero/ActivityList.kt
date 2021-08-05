@@ -1,5 +1,6 @@
 package ru.navapps.crimeaaero
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -41,6 +42,13 @@ class ActivityList : AppCompatActivity() {
 
         reloadBtn.setOnClickListener {
             setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar])
+        }
+
+        val faqBtn = findViewById<View>(R.id.btn_faq) as ImageButton
+
+        faqBtn.setOnClickListener {
+            val intent = Intent(this, FAQActivity::class.java)
+            startActivity(intent)
         }
 
         val itemSelectedListenerDates: AdapterView.OnItemSelectedListener =
