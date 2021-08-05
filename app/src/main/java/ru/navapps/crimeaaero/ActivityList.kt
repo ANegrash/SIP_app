@@ -1,5 +1,6 @@
 package ru.navapps.crimeaaero
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -168,5 +169,12 @@ class ActivityList : AppCompatActivity() {
         return ((date.split("T").toTypedArray()[1]).split("+").toTypedArray()[0]).split(":")
             .toTypedArray()[0] + ":" + ((date.split("T").toTypedArray()[1]).split("+")
             .toTypedArray()[0]).split(":").toTypedArray()[1]
+    }
+
+    // обработка нажатия на item recyclerview
+    private fun onListItemClick(position: Int) {
+        val intent = Intent(this, ItemActivity::class.java).apply {
+        }
+        startActivity(intent)
     }
 }
