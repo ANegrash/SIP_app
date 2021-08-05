@@ -11,4 +11,8 @@
     <color name="warning">#FF0000</color>
     <color name="lightBlue">#38B6FF</color>
     <color name="gray">#EDEEF0</color>
+    <color name="lightBack">#D0E1F9</color>
+    <color name="darkBack">#4D648D</color>
+    <color name="xdarkBack">#283655</color>
+    <color name="textColor">#1E1F26</color>
 </resources>
