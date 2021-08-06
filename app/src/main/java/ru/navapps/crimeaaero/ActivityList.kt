@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
+import ru.navapps.crimeaaero.databinding.ActivityListBinding
 import ru.navapps.crimeaaero.entities.FlightModel
 import ru.navapps.crimeaaero.entities.JsonObject
 import java.io.IOException
@@ -29,12 +30,14 @@ class ActivityList : AppCompatActivity() {
         setContentView(R.layout.activity_list)
 
         val spinnerDates = findViewById<View>(R.id.spinner_dates) as Spinner
-        val adapterDates: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, datesArray)
+        val adapterDates: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, datesArray)
         adapterDates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerDates.adapter = adapterDates
 
         val spinnerTypes = findViewById<View>(R.id.spinner_flightTypes) as Spinner
-        val adapterTypes: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, typesArray)
+        val adapterTypes: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, typesArray)
         adapterTypes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerTypes.adapter = adapterTypes
 
@@ -81,9 +84,10 @@ class ActivityList : AppCompatActivity() {
     }
 
     private fun setRecyclerViewContent(
-        type : String,
-        date : String,
-        lang: String = "ru") {
+        type: String,
+        date: String,
+        lang: String = "ru"
+    ) {
 
         var url = "https://new.sipaero.ru/json/schedule/?"
         if (type != "") url += "type=$type&"
@@ -110,10 +114,10 @@ class ActivityList : AppCompatActivity() {
                     val listOfObjects: ArrayList<FlightModel> = arrayListOf()
                     listOfObjects.clear()
                     val responseString = response.body()!!.string()
-                    val json : JsonObject? = Gson().fromJson(responseString, JsonObject::class.java)
+                    val json: JsonObject? = Gson().fromJson(responseString, JsonObject::class.java)
 
                     if (json != null) {
-                        if (type == "departure"){
+                        if (type == "departure") {
                             when (date) {
                                 "yesterday" -> {
                                     for (i in json.departure?.yesterday!!)
@@ -128,7 +132,7 @@ class ActivityList : AppCompatActivity() {
                                         listOfObjects.add(i)
                                 }
                             }
-                        } else if (type == "arrival"){
+                        } else if (type == "arrival") {
                             when (date) {
                                 "yesterday" -> {
                                     for (i in json.arrival?.yesterday!!)
@@ -146,7 +150,7 @@ class ActivityList : AppCompatActivity() {
                         }
                     }
 
-                    for (k in listOfObjects){
+                    for (k in listOfObjects) {
                         k.dateTime = getTimeFromDate(k.dateTime)
                     }
                     this@ActivityList.runOnUiThread(Runnable() {
@@ -156,25 +160,22 @@ class ActivityList : AppCompatActivity() {
                             recyclerView.apply {
                                 layoutManager = LinearLayoutManager(this@ActivityList)
                                 adapter = ListAdapter(listOfObjects)
+
                             }
                         }
                     })
                 }
-            }
-        )
+            })
     }
 
 
     private fun getTimeFromDate(date: String): String {
-        return ((date.split("T").toTypedArray()[1]).split("+").toTypedArray()[0]).split(":")
-            .toTypedArray()[0] + ":" + ((date.split("T").toTypedArray()[1]).split("+")
+        return ((date.split("T").toTypedArray()[1]).split("+")
+            .toTypedArray()[0]).split(
+            ":"
+        )
+            .toTypedArray()[0] + ":" + ((date.split("T")
+            .toTypedArray()[1]).split("+")
             .toTypedArray()[0]).split(":").toTypedArray()[1]
-    }
-
-    // обработка нажатия на item recyclerview
-    private fun onListItemClick(position: Int) {
-        val intent = Intent(this, ItemActivity::class.java).apply {
-        }
-        startActivity(intent)
     }
 }
