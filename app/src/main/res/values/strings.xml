@@ -3,4 +3,8 @@
     <string name="main_activity_title">Онлайн-табло</string>
     <string name="direction">Направление:</string>
     <string name="day">День:</string>
+    <string name="reception_desks">Стойки регистрации:</string>
+    <string name="exit">Выход:</string>
+    <string name="plan_date">Планируемая дата:</string>
+    <string name="company">Авиакомпания:</string>
 </resources>
