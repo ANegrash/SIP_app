@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#f6f2f2"
+    android:background="@color/gray"
     android:orientation="vertical">
 
     <LinearLayout
@@ -28,7 +28,7 @@
                 android:fontFamily="@font/number"
                 android:gravity="center"
                 android:text="00:00"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/russian"
                         android:text="Направление"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/number"
                     android:text="NUM-00"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -111,7 +111,7 @@
         android:layout_marginLeft="80dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:background="@color/secondary"
+        android:background="@color/xdarkBack"
         android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>

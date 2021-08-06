@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -29,6 +30,14 @@ class ActivityList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        val recyclerLayout = findViewById<View>(R.id.recyclerView_flightList) as RecyclerView
+        val loadingLayout = findViewById<View>(R.id.loading_layout) as ConstraintLayout
+        val wifiErrLayout = findViewById<View>(R.id.wifi_err_layout) as ConstraintLayout
+
+        recyclerLayout.visibility = View.GONE
+        wifiErrLayout.visibility = View.GONE
+        loadingLayout.visibility = View.VISIBLE
+
         val spinnerDates = findViewById<View>(R.id.spinner_dates) as Spinner
         val adapterDates: ArrayAdapter<String> =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, datesArray)
@@ -44,7 +53,17 @@ class ActivityList : AppCompatActivity() {
         val reloadBtn = findViewById<View>(R.id.btn_reloadTable) as ImageButton
 
         reloadBtn.setOnClickListener {
+            recyclerLayout.visibility = View.GONE
+            loadingLayout.visibility = View.VISIBLE
+            wifiErrLayout.visibility = View.GONE
             setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar])
+        }
+
+        val faqBtn = findViewById<View>(R.id.btn_faq) as ImageButton
+
+        faqBtn.setOnClickListener {
+            val intent = Intent(this, FAQActivity::class.java)
+            startActivity(intent)
         }
 
         val itemSelectedListenerDates: AdapterView.OnItemSelectedListener =
@@ -55,6 +74,9 @@ class ActivityList : AppCompatActivity() {
                     position: Int,
                     id: Long
                 ) {
+                    recyclerLayout.visibility = View.GONE
+                    loadingLayout.visibility = View.VISIBLE
+                    wifiErrLayout.visibility = View.GONE
                     dateVar = position
                     setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar])
                 }
@@ -71,6 +93,9 @@ class ActivityList : AppCompatActivity() {
                     position: Int,
                     id: Long
                 ) {
+                    recyclerLayout.visibility = View.GONE
+                    loadingLayout.visibility = View.VISIBLE
+                    wifiErrLayout.visibility = View.GONE
                     typeVar = position
                     setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar])
                 }
@@ -80,7 +105,6 @@ class ActivityList : AppCompatActivity() {
         spinnerTypes.onItemSelectedListener = itemSelectedListenerTypes
 
         setRecyclerViewContent("departure", "tomorrow")
-
     }
 
     private fun setRecyclerViewContent(
@@ -101,11 +125,13 @@ class ActivityList : AppCompatActivity() {
             object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     this@ActivityList.runOnUiThread(Runnable {
-                        Toast.makeText(
-                            applicationContext,
-                            "Проблемы с соединением. Попробуйте позже",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        val wifiErrLayout = findViewById<View>(R.id.wifi_err_layout) as ConstraintLayout
+                        val loadingLayout = findViewById<View>(R.id.loading_layout) as ConstraintLayout
+                        val recyclerLayout = findViewById<View>(R.id.recyclerView_flightList) as RecyclerView
+
+                        wifiErrLayout.visibility = View.VISIBLE
+                        recyclerLayout.visibility = View.GONE
+                        loadingLayout.visibility = View.GONE
                     })
                 }
 
@@ -162,6 +188,13 @@ class ActivityList : AppCompatActivity() {
                                 adapter = ListAdapter(listOfObjects)
 
                             }
+
+                            val loadingLayout = findViewById<View>(R.id.loading_layout) as ConstraintLayout
+                            val wifiErrLayout = findViewById<View>(R.id.wifi_err_layout) as ConstraintLayout
+
+                            recyclerView.visibility = View.VISIBLE
+                            loadingLayout.visibility = View.GONE
+                            wifiErrLayout.visibility = View.GONE
                         }
                     })
                 }
