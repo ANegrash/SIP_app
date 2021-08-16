@@ -32,7 +32,11 @@
                     android:id="@+id/backBtn"
                     android:layout_width="16dp"
                     android:layout_height="21dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginLeft="3dp"
                     android:background="@android:color/transparent"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
                     android:src="@drawable/back_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -113,19 +117,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_flight">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
                     <TextView
                         android:id="@+id/textview_first_flight"
                         style="@style/textStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/textColor"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/imageView_arrow"
                         app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +133,7 @@
                     <ImageView
                         android:id="@+id/imageView_arrow"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="18sp"
                         android:src="@drawable/ic_right_arrow"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textview_last_flight"
@@ -149,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/textColor"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView_arrow"

@@ -1,15 +1,11 @@
 package ru.navapps.crimeaaero;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import ru.navapps.crimeaaero.models.JsonModel;
 
 public class ActivityItem extends AppCompatActivity {
 
@@ -43,8 +39,8 @@ public class ActivityItem extends AppCompatActivity {
         if (checkin.isEmpty()){
             checkin = "-";
         }
-        String gate = intent.getStringExtra("gate");
-        if (gate == null){
+        String gate = intent.getStringExtra("exits");
+        if (gate.isEmpty()){
             gate = "-";
         }
         String airlineName = intent.getStringExtra("airlineName");

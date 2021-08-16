@@ -126,6 +126,10 @@ public class FlightModel {
         return this.gate;
     }
 
+    public void setGate(String gate) {
+        this.gate = gate;
+    }
+
     public String getAirport() {
         return this.airport;
     }
