@@ -14,7 +14,7 @@ class FAQActivity : AppCompatActivity() {
         val faqBtn = findViewById<View>(R.id.btn_faq_back) as ImageButton
 
         faqBtn.setOnClickListener {
-            val intent = Intent(this, ActivityList::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
