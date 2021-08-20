@@ -23,23 +23,11 @@ public class TypeFlightModel {
         return this.yesterday;
     }
 
-    public void setYesterday(List<FlightModel> yesterday) {
-        this.yesterday = yesterday;
-    }
-
     public List<FlightModel> getToday() {
         return this.today;
     }
 
-    public void setToday(List<FlightModel> today) {
-        this.today = today;
-    }
-
     public List<FlightModel> getTomorrow() {
         return this.tomorrow;
-    }
-
-    public void setTomorrow(List<FlightModel> tomorrow) {
-        this.tomorrow = tomorrow;
     }
 }

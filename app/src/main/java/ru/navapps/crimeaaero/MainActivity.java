@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String[] typesArray = {"Вылет", "Прилёт"};
     String[] typesArrayQuery = {"departure", "arrival"};
     Integer typeVar = 0;
-    private List<JsonModel> states = new ArrayList();
+    private List<JsonModel> arrayList = new ArrayList();
     ListView listView;
 
     @Override
@@ -150,23 +150,23 @@ public class MainActivity extends AppCompatActivity {
                         GsonBuilder builder = new GsonBuilder();
                         Gson gson = builder.create();
                         JsonModel jm = gson.fromJson(result, JsonModel.class);
-                        states.clear();
+                        arrayList.clear();
 
                         if (jm.getType().equals("departure")){
                             switch (jm.getDate()) {
                                 case "yesterday":
                                     for (int i = 0; i < jm.getDeparture().getYesterday().size(); i++) {
-                                        states.add(jm);
+                                        arrayList.add(jm);
                                     }
                                     break;
                                 case "today":
                                     for (int i = 0; i < jm.getDeparture().getToday().size(); i++) {
-                                        states.add(jm);
+                                        arrayList.add(jm);
                                     }
                                     break;
                                 case "tomorrow":
                                     for (int i = 0; i < jm.getDeparture().getTomorrow().size(); i++) {
-                                        states.add(jm);
+                                        arrayList.add(jm);
                                     }
                                     break;
                             }
@@ -174,17 +174,17 @@ public class MainActivity extends AppCompatActivity {
                             switch (jm.getDate()) {
                                 case "yesterday":
                                     for (int i = 0; i < jm.getArrival().getYesterday().size(); i++) {
-                                        states.add(jm);
+                                        arrayList.add(jm);
                                     }
                                     break;
                                 case "today":
                                     for (int i = 0; i < jm.getArrival().getToday().size(); i++) {
-                                        states.add(jm);
+                                        arrayList.add(jm);
                                     }
                                     break;
                                 case "tomorrow":
                                     for (int i = 0; i < jm.getArrival().getTomorrow().size(); i++) {
-                                        states.add(jm);
+                                        arrayList.add(jm);
                                     }
                                     break;
                             }
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Adapter stateAdapter = new Adapter(getApplicationContext(), R.layout.list_element, states);
+                                Adapter stateAdapter = new Adapter(getApplicationContext(), R.layout.list_element, arrayList);
                                 listView.setAdapter(stateAdapter);
                                 AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
                                     @Override
@@ -212,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                                                     intent.putExtra("checkin", fm.getCheckin());
                                                     intent.putExtra("exits", fm.getGate());
                                                     intent.putExtra("airlineName", fm.getAirlineName());
+                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
                                                     intent.putExtra("date", fm.getDateTime());
                                                     break;
                                                 case "today":
@@ -223,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
                                                     intent.putExtra("checkin", fm.getCheckin());
                                                     intent.putExtra("exits", fm.getGate());
                                                     intent.putExtra("airlineName", fm.getAirlineName());
+                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
                                                     intent.putExtra("date", fm.getDateTime());
                                                     break;
                                                 case "tomorrow":
@@ -234,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                                                     intent.putExtra("checkin", fm.getCheckin());
                                                     intent.putExtra("exits", fm.getGate());
                                                     intent.putExtra("airlineName", fm.getAirlineName());
+                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
                                                     intent.putExtra("date", fm.getDateTime());
                                                     break;
                                             }
@@ -248,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
                                                     intent.putExtra("checkin", fm.getCheckin());
                                                     intent.putExtra("exits", fm.getGate());
                                                     intent.putExtra("airlineName", fm.getAirlineName());
+                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
                                                     intent.putExtra("date", fm.getDateTime());
                                                     break;
                                                 case "today":
@@ -259,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
                                                     intent.putExtra("checkin", fm.getCheckin());
                                                     intent.putExtra("exits", fm.getGate());
                                                     intent.putExtra("airlineName", fm.getAirlineName());
+                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
                                                     intent.putExtra("date", fm.getDateTime());
                                                     break;
                                                 case "tomorrow":
@@ -270,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
                                                     intent.putExtra("checkin", fm.getCheckin());
                                                     intent.putExtra("exits", fm.getGate());
                                                     intent.putExtra("airlineName", fm.getAirlineName());
+                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
                                                     intent.putExtra("date", fm.getDateTime());
                                                     break;
                                             }

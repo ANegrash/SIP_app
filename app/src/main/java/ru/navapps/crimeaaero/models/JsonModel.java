@@ -38,15 +38,7 @@ public class JsonModel {
         return this.departure;
     }
 
-    public void setDeparture(TypeFlightModel departure) {
-        this.departure = departure;
-    }
-
     public TypeFlightModel getArrival() {
         return this.arrival;
-    }
-
-    public void setArrival(TypeFlightModel arrival) {
-        this.arrival = arrival;
     }
 }

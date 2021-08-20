@@ -54,111 +54,35 @@ public class FlightModel {
         return this.type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getDateTime() {
         return this.dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getAirline() {
-        return this.airline;
-    }
-
-    public void setAirline(String airline) {
-        this.airline = airline;
     }
 
     public String getAirlineName() {
         return this.airlineName;
     }
 
-    public void setAirlineName(String airlineName) {
-        this.airlineName = airlineName;
-    }
-
     public String getAirlineLogo() {
-        return this.airlineLogo;
-    }
-
-    public void setAirlineLogo(String airlineLogo) {
-        this.airlineLogo = airlineLogo;
-    }
-
-    public Integer getNumber() {
-        return this.number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
+        return "https://new.sipaero.ru" + this.airlineLogo;
     }
 
     public String getFlight() {
         return this.flight;
     }
 
-    public void setFlight(String flight) {
-        this.flight = flight;
-    }
-
     public String getCheckin() {
         return this.checkin;
-    }
-
-    public void setCheckin(String checkin) {
-        this.checkin = checkin;
-    }
-
-    public Integer getTerminal() {
-        return this.terminal;
-    }
-
-    public void setTerminal(Integer terminal) {
-        this.terminal = terminal;
     }
 
     public String getGate() {
         return this.gate;
     }
 
-    public void setGate(String gate) {
-        this.gate = gate;
-    }
-
-    public String getAirport() {
-        return this.airport;
-    }
-
-    public void setAirport(String airport) {
-        this.airport = airport;
-    }
-
     public String getDirection() {
         return this.direction;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
     public String getStatus() {
         return this.status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDelay() {
-        return this.delay;
-    }
-
-    public void setDelay(String delay) {
-        this.delay = delay;
     }
 }

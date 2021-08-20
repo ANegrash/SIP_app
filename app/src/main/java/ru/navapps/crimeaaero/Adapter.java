@@ -34,38 +34,46 @@ public class Adapter extends ArrayAdapter<JsonModel> {
         JsonModel obj = jsonObject.get(position);
 
         if (obj.getType().equals("departure")) {
-            if (obj.getDate().equals("yesterday")){
-                time.setText(getTrueTime(obj.getDeparture().getYesterday().get(position).getDateTime()));
-                direction.setText(obj.getDeparture().getYesterday().get(position).getDirection());
-                status.setText(obj.getDeparture().getYesterday().get(position).getStatus());
-                number.setText(obj.getDeparture().getYesterday().get(position).getFlight());
-            } else if (obj.getDate().equals("today")){
-                time.setText(getTrueTime(obj.getDeparture().getToday().get(position).getDateTime()));
-                direction.setText(obj.getDeparture().getToday().get(position).getDirection());
-                status.setText(obj.getDeparture().getToday().get(position).getStatus());
-                number.setText(obj.getDeparture().getToday().get(position).getFlight());
-            } else if (obj.getDate().equals("tomorrow")){
-                time.setText(getTrueTime(obj.getDeparture().getTomorrow().get(position).getDateTime()));
-                direction.setText(obj.getDeparture().getTomorrow().get(position).getDirection());
-                status.setText(obj.getDeparture().getTomorrow().get(position).getStatus());
-                number.setText(obj.getDeparture().getTomorrow().get(position).getFlight());
+            switch (obj.getDate()) {
+                case "yesterday":
+                    time.setText(getTrueTime(obj.getDeparture().getYesterday().get(position).getDateTime()));
+                    direction.setText(obj.getDeparture().getYesterday().get(position).getDirection());
+                    status.setText(obj.getDeparture().getYesterday().get(position).getStatus());
+                    number.setText(obj.getDeparture().getYesterday().get(position).getFlight());
+                    break;
+                case "today":
+                    time.setText(getTrueTime(obj.getDeparture().getToday().get(position).getDateTime()));
+                    direction.setText(obj.getDeparture().getToday().get(position).getDirection());
+                    status.setText(obj.getDeparture().getToday().get(position).getStatus());
+                    number.setText(obj.getDeparture().getToday().get(position).getFlight());
+                    break;
+                case "tomorrow":
+                    time.setText(getTrueTime(obj.getDeparture().getTomorrow().get(position).getDateTime()));
+                    direction.setText(obj.getDeparture().getTomorrow().get(position).getDirection());
+                    status.setText(obj.getDeparture().getTomorrow().get(position).getStatus());
+                    number.setText(obj.getDeparture().getTomorrow().get(position).getFlight());
+                    break;
             }
         } else if (obj.getType().equals("arrival")) {
-            if (obj.getDate().equals("yesterday")){
-                time.setText(getTrueTime(obj.getArrival().getYesterday().get(position).getDateTime()));
-                direction.setText(obj.getArrival().getYesterday().get(position).getDirection());
-                status.setText(obj.getArrival().getYesterday().get(position).getStatus());
-                number.setText(obj.getArrival().getYesterday().get(position).getFlight());
-            } else if (obj.getDate().equals("today")){
-                time.setText(getTrueTime(obj.getArrival().getToday().get(position).getDateTime()));
-                direction.setText(obj.getArrival().getToday().get(position).getDirection());
-                status.setText(obj.getArrival().getToday().get(position).getStatus());
-                number.setText(obj.getArrival().getToday().get(position).getFlight());
-            } else if (obj.getDate().equals("tomorrow")){
-                time.setText(getTrueTime(obj.getArrival().getTomorrow().get(position).getDateTime()));
-                direction.setText(obj.getArrival().getTomorrow().get(position).getDirection());
-                status.setText(obj.getArrival().getTomorrow().get(position).getStatus());
-                number.setText(obj.getArrival().getTomorrow().get(position).getFlight());
+            switch (obj.getDate()) {
+                case "yesterday":
+                    time.setText(getTrueTime(obj.getArrival().getYesterday().get(position).getDateTime()));
+                    direction.setText(obj.getArrival().getYesterday().get(position).getDirection());
+                    status.setText(obj.getArrival().getYesterday().get(position).getStatus());
+                    number.setText(obj.getArrival().getYesterday().get(position).getFlight());
+                    break;
+                case "today":
+                    time.setText(getTrueTime(obj.getArrival().getToday().get(position).getDateTime()));
+                    direction.setText(obj.getArrival().getToday().get(position).getDirection());
+                    status.setText(obj.getArrival().getToday().get(position).getStatus());
+                    number.setText(obj.getArrival().getToday().get(position).getFlight());
+                    break;
+                case "tomorrow":
+                    time.setText(getTrueTime(obj.getArrival().getTomorrow().get(position).getDateTime()));
+                    direction.setText(obj.getArrival().getTomorrow().get(position).getDirection());
+                    status.setText(obj.getArrival().getTomorrow().get(position).getStatus());
+                    number.setText(obj.getArrival().getTomorrow().get(position).getFlight());
+                    break;
             }
         }
 

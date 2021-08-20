@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class ActivityItem extends AppCompatActivity {
 
@@ -23,6 +26,7 @@ public class ActivityItem extends AppCompatActivity {
         TextView tvAirline = findViewById(R.id.textView_company_name);
         TextView tvDate = findViewById(R.id.textView_plan_date_current);
         ImageButton backBtn = findViewById(R.id.backBtn);
+        ImageView airlineLogoImage = findViewById(R.id.airlineLogo);
 
         backBtn.setOnClickListener(view -> {
             Intent intentNew = new Intent(this, MainActivity.class);
@@ -44,6 +48,7 @@ public class ActivityItem extends AppCompatActivity {
             gate = "-";
         }
         String airlineName = intent.getStringExtra("airlineName");
+        String airlineLogo = intent.getStringExtra("airlineLogo");
         String date = intent.getStringExtra("date");
 
         tvFlight.setText(flightName);
@@ -59,6 +64,7 @@ public class ActivityItem extends AppCompatActivity {
         tvExits.setText(gate);
         tvAirline.setText(airlineName);
         tvDate.setText(getNormalDate(date));
+        Picasso.get().load(airlineLogo).into(airlineLogoImage);
     }
 
     public String getNormalDate(String date){
@@ -79,6 +85,8 @@ public class ActivityItem extends AppCompatActivity {
             case "12" : month = "декабря"; break;
         }
         String[] timePart = date.split("T")[1].split("\\+")[0].split(":");
-        return datePart[2] + " " + month + " " + datePart[0] + " " + timePart[0] + ":" + timePart[1];
+        String returnedDate = datePart[2] + " " + month;
+        String returnedTime = timePart[0] + ":" + timePart[1];
+        return returnedTime + ", " + returnedDate;
     }
 }
