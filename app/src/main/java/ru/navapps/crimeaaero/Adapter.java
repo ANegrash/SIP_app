@@ -26,10 +26,10 @@ public class Adapter extends ArrayAdapter<JsonModel> {
 
         View view = inflater.inflate(this.layout, parent, false);
 
-        TextView time = (TextView) view.findViewById(R.id.textView_listTime);
-        TextView direction = (TextView) view.findViewById(R.id.textView_listCity);
-        TextView status = (TextView) view.findViewById(R.id.textView_listStatus);
-        TextView number = (TextView) view.findViewById(R.id.textView_listFlightNumber);
+        TextView time = view.findViewById(R.id.textView_listTime);
+        TextView direction = view.findViewById(R.id.textView_listCity);
+        TextView status = view.findViewById(R.id.textView_listStatus);
+        TextView number = view.findViewById(R.id.textView_listFlightNumber);
 
         JsonModel obj = jsonObject.get(position);
 
