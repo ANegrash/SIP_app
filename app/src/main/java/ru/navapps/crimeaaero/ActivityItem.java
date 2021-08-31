@@ -28,11 +28,7 @@ public class ActivityItem extends AppCompatActivity {
         ImageButton backBtn = findViewById(R.id.backBtn);
         ImageView airlineLogoImage = findViewById(R.id.airlineLogo);
 
-        backBtn.setOnClickListener(view -> {
-            Intent intentNew = new Intent(this, MainActivity.class);
-            startActivity(intentNew);
-            finish();
-        });
+        backBtn.setOnClickListener(view -> finish());
 
         String sip = "Симферополь";
         String flightName = intent.getStringExtra("flightName");
@@ -52,10 +48,10 @@ public class ActivityItem extends AppCompatActivity {
         String date = intent.getStringExtra("date");
 
         tvFlight.setText(flightName);
-        if (type.equals("arrival")){
+        if (type.equals("arrival")) {
             tvFrom.setText(direction);
             tvTo.setText(sip);
-        } else if (type.equals("departure")){
+        } else if (type.equals("departure")) {
             tvFrom.setText(sip);
             tvTo.setText(direction);
         }

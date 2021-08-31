@@ -49,8 +49,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
                     android:id="@+id/btn_faq"
@@ -66,8 +65,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_reloadTable"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:background="@android:color/transparent"
@@ -96,11 +95,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/errorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Проблемы с соединением"
                 android:textColor="@color/xdarkBack"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +106,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/errorImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="32dp"

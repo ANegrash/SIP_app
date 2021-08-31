@@ -30,13 +30,9 @@
 
                 <ImageButton
                     android:id="@+id/backBtn"
-                    android:layout_width="16dp"
-                    android:layout_height="21dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@android:color/transparent"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
                     android:src="@drawable/back_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +42,9 @@
                     android:id="@+id/imageView"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/backBtn"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.888"
                     app:srcCompat="@mipmap/logo_sip" />
 
                 <TextView
@@ -68,8 +61,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

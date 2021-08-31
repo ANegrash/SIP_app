@@ -27,13 +27,13 @@
 
                 <ImageButton
                     android:id="@+id/btn_faq_back"
-                    android:layout_width="16dp"
-                    android:layout_height="21dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/back_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -277,6 +277,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -289,7 +290,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/russian"
-                    android:text="версия 1.1"
+                    android:text="версия 1.1(2) от 31.08.2021"
                     android:textColor="@color/secondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

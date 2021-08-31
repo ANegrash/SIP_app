@@ -12,4 +12,5 @@
     <color name="darkBack">#4D648D</color>
     <color name="xdarkBack">#283655</color>
     <color name="textColor">#1E1F26</color>
+    <color name="warningColor">#FF0000</color>
 </resources>

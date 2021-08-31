@@ -85,4 +85,8 @@ public class FlightModel {
     public String getStatus() {
         return this.status;
     }
+
+    public String getDelay() {
+        return this.delay;
+    }
 }

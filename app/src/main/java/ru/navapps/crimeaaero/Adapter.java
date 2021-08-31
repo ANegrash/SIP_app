@@ -1,6 +1,7 @@
 package ru.navapps.crimeaaero;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ public class Adapter extends ArrayAdapter<JsonModel> {
     private LayoutInflater inflater;
     private int layout;
     private List<JsonModel> jsonObject;
+    public String warningColor = "#FF0000";
 
     public Adapter(Context context, int resource, List<JsonModel> jsonObjects) {
         super(context, resource, jsonObjects);
@@ -38,19 +40,31 @@ public class Adapter extends ArrayAdapter<JsonModel> {
                 case "yesterday":
                     time.setText(getTrueTime(obj.getDeparture().getYesterday().get(position).getDateTime()));
                     direction.setText(obj.getDeparture().getYesterday().get(position).getDirection());
-                    status.setText(obj.getDeparture().getYesterday().get(position).getStatus());
+                    if (!obj.getDeparture().getYesterday().get(position).getDelay().equals("")) {
+                        status.setTextColor(Color.parseColor(warningColor));
+                        status.setText(obj.getDeparture().getYesterday().get(position).getDelay());
+                    } else
+                        status.setText(obj.getDeparture().getYesterday().get(position).getStatus());
                     number.setText(obj.getDeparture().getYesterday().get(position).getFlight());
                     break;
                 case "today":
                     time.setText(getTrueTime(obj.getDeparture().getToday().get(position).getDateTime()));
                     direction.setText(obj.getDeparture().getToday().get(position).getDirection());
-                    status.setText(obj.getDeparture().getToday().get(position).getStatus());
+                    if (!obj.getDeparture().getToday().get(position).getDelay().equals("")) {
+                        status.setTextColor(Color.parseColor(warningColor));
+                        status.setText(obj.getDeparture().getToday().get(position).getDelay());
+                    } else
+                        status.setText(obj.getDeparture().getToday().get(position).getStatus());
                     number.setText(obj.getDeparture().getToday().get(position).getFlight());
                     break;
                 case "tomorrow":
                     time.setText(getTrueTime(obj.getDeparture().getTomorrow().get(position).getDateTime()));
                     direction.setText(obj.getDeparture().getTomorrow().get(position).getDirection());
-                    status.setText(obj.getDeparture().getTomorrow().get(position).getStatus());
+                    if (!obj.getDeparture().getTomorrow().get(position).getDelay().equals("")) {
+                        status.setTextColor(Color.parseColor(warningColor));
+                        status.setText(obj.getDeparture().getTomorrow().get(position).getDelay());
+                    } else
+                        status.setText(obj.getDeparture().getTomorrow().get(position).getStatus());
                     number.setText(obj.getDeparture().getTomorrow().get(position).getFlight());
                     break;
             }
@@ -59,19 +73,31 @@ public class Adapter extends ArrayAdapter<JsonModel> {
                 case "yesterday":
                     time.setText(getTrueTime(obj.getArrival().getYesterday().get(position).getDateTime()));
                     direction.setText(obj.getArrival().getYesterday().get(position).getDirection());
-                    status.setText(obj.getArrival().getYesterday().get(position).getStatus());
+                    if (!obj.getArrival().getYesterday().get(position).getDelay().equals("")) {
+                        status.setTextColor(Color.parseColor(warningColor));
+                        status.setText(obj.getArrival().getYesterday().get(position).getDelay());
+                    } else
+                        status.setText(obj.getArrival().getYesterday().get(position).getStatus());
                     number.setText(obj.getArrival().getYesterday().get(position).getFlight());
                     break;
                 case "today":
                     time.setText(getTrueTime(obj.getArrival().getToday().get(position).getDateTime()));
                     direction.setText(obj.getArrival().getToday().get(position).getDirection());
-                    status.setText(obj.getArrival().getToday().get(position).getStatus());
+                    if (!obj.getArrival().getToday().get(position).getDelay().equals("")) {
+                        status.setTextColor(Color.parseColor(warningColor));
+                        status.setText(obj.getArrival().getToday().get(position).getDelay());
+                    } else
+                        status.setText(obj.getArrival().getToday().get(position).getStatus());
                     number.setText(obj.getArrival().getToday().get(position).getFlight());
                     break;
                 case "tomorrow":
                     time.setText(getTrueTime(obj.getArrival().getTomorrow().get(position).getDateTime()));
                     direction.setText(obj.getArrival().getTomorrow().get(position).getDirection());
-                    status.setText(obj.getArrival().getTomorrow().get(position).getStatus());
+                    if (!obj.getArrival().getTomorrow().get(position).getDelay().equals("")) {
+                        status.setTextColor(Color.parseColor(warningColor));
+                        status.setText(obj.getArrival().getTomorrow().get(position).getDelay());
+                    } else
+                        status.setText(obj.getArrival().getTomorrow().get(position).getStatus());
                     number.setText(obj.getArrival().getTomorrow().get(position).getFlight());
                     break;
             }
