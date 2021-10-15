@@ -2,11 +2,15 @@ package ru.navapps.crimeaaero;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import ru.navapps.crimeaaero.models.JsonModel;
@@ -34,10 +38,12 @@ public class Adapter extends ArrayAdapter<JsonModel> {
         TextView number = view.findViewById(R.id.textView_listFlightNumber);
 
         JsonModel obj = jsonObject.get(position);
+        String dateString = "";
 
         if (obj.getType().equals("departure")) {
             switch (obj.getDate()) {
                 case "yesterday":
+                    dateString = obj.getDeparture().getYesterday().get(position).getDateTime();
                     time.setText(getTrueTime(obj.getDeparture().getYesterday().get(position).getDateTime()));
                     direction.setText(obj.getDeparture().getYesterday().get(position).getDirection());
                     if (!obj.getDeparture().getYesterday().get(position).getDelay().equals("")) {
@@ -48,6 +54,7 @@ public class Adapter extends ArrayAdapter<JsonModel> {
                     number.setText(obj.getDeparture().getYesterday().get(position).getFlight());
                     break;
                 case "today":
+                    dateString = obj.getDeparture().getToday().get(position).getDateTime();
                     time.setText(getTrueTime(obj.getDeparture().getToday().get(position).getDateTime()));
                     direction.setText(obj.getDeparture().getToday().get(position).getDirection());
                     if (!obj.getDeparture().getToday().get(position).getDelay().equals("")) {
@@ -71,6 +78,7 @@ public class Adapter extends ArrayAdapter<JsonModel> {
         } else if (obj.getType().equals("arrival")) {
             switch (obj.getDate()) {
                 case "yesterday":
+                    dateString = obj.getArrival().getYesterday().get(position).getDateTime();
                     time.setText(getTrueTime(obj.getArrival().getYesterday().get(position).getDateTime()));
                     direction.setText(obj.getArrival().getYesterday().get(position).getDirection());
                     if (!obj.getArrival().getYesterday().get(position).getDelay().equals("")) {
@@ -81,6 +89,7 @@ public class Adapter extends ArrayAdapter<JsonModel> {
                     number.setText(obj.getArrival().getYesterday().get(position).getFlight());
                     break;
                 case "today":
+                    dateString = obj.getArrival().getToday().get(position).getDateTime();
                     time.setText(getTrueTime(obj.getArrival().getToday().get(position).getDateTime()));
                     direction.setText(obj.getArrival().getToday().get(position).getDirection());
                     if (!obj.getArrival().getToday().get(position).getDelay().equals("")) {
