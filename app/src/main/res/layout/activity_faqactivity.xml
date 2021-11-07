@@ -290,7 +290,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/russian"
-                    android:text="версия 1.1(2) от 31.08.2021"
+                    android:text="версия 1.1(3) от 07.11.2021"
                     android:textColor="@color/secondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
