@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -145,11 +146,188 @@ public class MainActivity extends AppCompatActivity {
 
         Get test = new Get();
 
-        test.run(
-                url,
-                new Callback() {
-                    @Override
-                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+        test.run(url, new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(() -> {
+                    ListView listView = findViewById(R.id.recyclerView_flightList);
+                    ConstraintLayout loadingLayout = findViewById(R.id.loading_layout);
+                    ConstraintLayout wifiLayout = findViewById(R.id.wifi_err_layout);
+                    ImageView errImg = findViewById(R.id.errorImage);
+                    TextView errText = findViewById(R.id.errorText);
+
+                    errImg.setImageDrawable(getResources().getDrawable(R.drawable.nowifi));
+                    errText.setText("Проблемы с соединением");
+                    listView.setVisibility(View.GONE);
+                    loadingLayout.setVisibility(View.GONE);
+                    wifiLayout.setVisibility(View.VISIBLE);
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        GsonBuilder builder = new GsonBuilder();
+                        Gson gson = builder.create();
+                        JsonModel jm = gson.fromJson(result, JsonModel.class);
+
+                        arrayList.clear();
+
+                        if (jm.getType() != null) {
+                            if (jm.getType().equals("departure")) {
+                                switch (jm.getDate()) {
+                                    case "yesterday":
+                                        for (int i = 0; i < jm.getDeparture().getYesterday().size(); i++) {
+                                            arrayList.add(jm);
+                                        }
+                                        break;
+                                    case "today":
+                                        for (int i = 0; i < jm.getDeparture().getToday().size(); i++) {
+                                            arrayList.add(jm);
+                                        }
+                                        break;
+                                    case "tomorrow":
+                                        for (int i = 0; i < jm.getDeparture().getTomorrow().size(); i++) {
+                                            arrayList.add(jm);
+                                        }
+                                        break;
+                                }
+                            } else if (jm.getType().equals("arrival")) {
+                                switch (jm.getDate()) {
+                                    case "yesterday":
+                                        for (int i = 0; i < jm.getArrival().getYesterday().size(); i++) {
+                                            arrayList.add(jm);
+                                        }
+                                        break;
+                                    case "today":
+                                        for (int i = 0; i < jm.getArrival().getToday().size(); i++) {
+                                            arrayList.add(jm);
+                                        }
+                                        break;
+                                    case "tomorrow":
+                                        for (int i = 0; i < jm.getArrival().getTomorrow().size(); i++) {
+                                            arrayList.add(jm);
+                                        }
+                                        break;
+                                }
+                            }
+
+                            runOnUiThread(() -> {
+                                Adapter stateAdapter = new Adapter(getApplicationContext(), R.layout.list_element, arrayList);
+                                listView.setAdapter(stateAdapter);
+                                AdapterView.OnItemClickListener itemListener = (parent, v, position, id) -> {
+                                    Intent intent = new Intent(getApplicationContext(), ActivityItem.class);
+
+                                    FlightModel fm;
+                                    if (jm.getType().equals("departure")) {
+                                        switch (jm.getDate()) {
+                                            case "yesterday":
+                                                fm = jm.getDeparture().getYesterday().get(position);
+                                                intent.putExtra("flightName", fm.getFlight());
+                                                intent.putExtra("direction", fm.getDirection());
+                                                intent.putExtra("type", fm.getType());
+                                                intent.putExtra("status", fm.getStatus());
+                                                intent.putExtra("checkin", fm.getCheckin());
+                                                intent.putExtra("exits", fm.getGate());
+                                                intent.putExtra("airlineName", fm.getAirlineName());
+                                                intent.putExtra("airlineLogo", fm.getAirlineLogo());
+                                                intent.putExtra("date", fm.getDateTime());
+                                                break;
+                                            case "today":
+                                                fm = jm.getDeparture().getToday().get(position);
+                                                intent.putExtra("flightName", fm.getFlight());
+                                                intent.putExtra("direction", fm.getDirection());
+                                                intent.putExtra("type", fm.getType());
+                                                intent.putExtra("status", fm.getStatus());
+                                                intent.putExtra("checkin", fm.getCheckin());
+                                                intent.putExtra("exits", fm.getGate());
+                                                intent.putExtra("airlineName", fm.getAirlineName());
+                                                intent.putExtra("airlineLogo", fm.getAirlineLogo());
+                                                intent.putExtra("date", fm.getDateTime());
+                                                break;
+                                            case "tomorrow":
+                                                fm = jm.getDeparture().getTomorrow().get(position);
+                                                intent.putExtra("flightName", fm.getFlight());
+                                                intent.putExtra("direction", fm.getDirection());
+                                                intent.putExtra("type", fm.getType());
+                                                intent.putExtra("status", fm.getStatus());
+                                                intent.putExtra("checkin", fm.getCheckin());
+                                                intent.putExtra("exits", fm.getGate());
+                                                intent.putExtra("airlineName", fm.getAirlineName());
+                                                intent.putExtra("airlineLogo", fm.getAirlineLogo());
+                                                intent.putExtra("date", fm.getDateTime());
+                                                break;
+                                        }
+                                    } else if (jm.getType().equals("arrival")) {
+                                        switch (jm.getDate()) {
+                                            case "yesterday":
+                                                fm = jm.getArrival().getYesterday().get(position);
+                                                intent.putExtra("flightName", fm.getFlight());
+                                                intent.putExtra("direction", fm.getDirection());
+                                                intent.putExtra("type", fm.getType());
+                                                intent.putExtra("status", fm.getStatus());
+                                                intent.putExtra("checkin", fm.getCheckin());
+                                                intent.putExtra("exits", fm.getGate());
+                                                intent.putExtra("airlineName", fm.getAirlineName());
+                                                intent.putExtra("airlineLogo", fm.getAirlineLogo());
+                                                intent.putExtra("date", fm.getDateTime());
+                                                break;
+                                            case "today":
+                                                fm = jm.getArrival().getToday().get(position);
+                                                intent.putExtra("flightName", fm.getFlight());
+                                                intent.putExtra("direction", fm.getDirection());
+                                                intent.putExtra("type", fm.getType());
+                                                intent.putExtra("status", fm.getStatus());
+                                                intent.putExtra("checkin", fm.getCheckin());
+                                                intent.putExtra("exits", fm.getGate());
+                                                intent.putExtra("airlineName", fm.getAirlineName());
+                                                intent.putExtra("airlineLogo", fm.getAirlineLogo());
+                                                intent.putExtra("date", fm.getDateTime());
+                                                break;
+                                            case "tomorrow":
+                                                fm = jm.getArrival().getTomorrow().get(position);
+                                                intent.putExtra("flightName", fm.getFlight());
+                                                intent.putExtra("direction", fm.getDirection());
+                                                intent.putExtra("type", fm.getType());
+                                                intent.putExtra("status", fm.getStatus());
+                                                intent.putExtra("checkin", fm.getCheckin());
+                                                intent.putExtra("exits", fm.getGate());
+                                                intent.putExtra("airlineName", fm.getAirlineName());
+                                                intent.putExtra("airlineLogo", fm.getAirlineLogo());
+                                                intent.putExtra("date", fm.getDateTime());
+                                                break;
+                                        }
+                                    }
+                                    startActivity(intent);
+                                };
+                                listView.setOnItemClickListener(itemListener);
+                                ListView listView = findViewById(R.id.recyclerView_flightList);
+                                ConstraintLayout loadingLayout = findViewById(R.id.loading_layout);
+                                ConstraintLayout wifiLayout = findViewById(R.id.wifi_err_layout);
+
+                                listView.setVisibility(View.VISIBLE);
+                                loadingLayout.setVisibility(View.GONE);
+                                wifiLayout.setVisibility(View.GONE);
+
+                            });
+                        } else {
+                            runOnUiThread(() -> {
+                                ListView listView = findViewById(R.id.recyclerView_flightList);
+                                ConstraintLayout loadingLayout = findViewById(R.id.loading_layout);
+                                ConstraintLayout wifiLayout = findViewById(R.id.wifi_err_layout);
+                                ImageView errImg = findViewById(R.id.errorImage);
+                                TextView errText = findViewById(R.id.errorText);
+
+                                errImg.setImageDrawable(getResources().getDrawable(R.drawable.error));
+                                errText.setText("Какие-то проблемы на сервере. Попробуйте позже");
+                                listView.setVisibility(View.GONE);
+                                loadingLayout.setVisibility(View.GONE);
+                                wifiLayout.setVisibility(View.VISIBLE);
+                            });
+                        }
+                    } catch (JsonSyntaxException e) {
                         runOnUiThread(() -> {
                             ListView listView = findViewById(R.id.recyclerView_flightList);
                             ConstraintLayout loadingLayout = findViewById(R.id.loading_layout);
@@ -157,178 +335,16 @@ public class MainActivity extends AppCompatActivity {
                             ImageView errImg = findViewById(R.id.errorImage);
                             TextView errText = findViewById(R.id.errorText);
 
-                            errImg.setImageDrawable(getResources().getDrawable(R.drawable.nowifi));
-                            errText.setText("Проблемы с соединением");
+                            errImg.setImageDrawable(getResources().getDrawable(R.drawable.error));
+                            errText.setText("Какие-то проблемы на сервере. Попробуйте позже");
                             listView.setVisibility(View.GONE);
                             loadingLayout.setVisibility(View.GONE);
                             wifiLayout.setVisibility(View.VISIBLE);
                         });
                     }
-
-                    @Override
-                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                        if (response.body() != null) {
-                            String result = response.body().string();
-                            GsonBuilder builder = new GsonBuilder();
-                            Gson gson = builder.create();
-                            JsonModel jm = gson.fromJson(result, JsonModel.class);
-                            arrayList.clear();
-
-                            if (jm.getType() != null) {
-                                if (jm.getType().equals("departure")) {
-                                    switch (jm.getDate()) {
-                                        case "yesterday":
-                                            for (int i = 0; i < jm.getDeparture().getYesterday().size(); i++) {
-                                                arrayList.add(jm);
-                                            }
-                                            break;
-                                        case "today":
-                                            for (int i = 0; i < jm.getDeparture().getToday().size(); i++) {
-                                                arrayList.add(jm);
-                                            }
-                                            break;
-                                        case "tomorrow":
-                                            for (int i = 0; i < jm.getDeparture().getTomorrow().size(); i++) {
-                                                arrayList.add(jm);
-                                            }
-                                            break;
-                                    }
-                                } else if (jm.getType().equals("arrival")) {
-                                    switch (jm.getDate()) {
-                                        case "yesterday":
-                                            for (int i = 0; i < jm.getArrival().getYesterday().size(); i++) {
-                                                arrayList.add(jm);
-                                            }
-                                            break;
-                                        case "today":
-                                            for (int i = 0; i < jm.getArrival().getToday().size(); i++) {
-                                                arrayList.add(jm);
-                                            }
-                                            break;
-                                        case "tomorrow":
-                                            for (int i = 0; i < jm.getArrival().getTomorrow().size(); i++) {
-                                                arrayList.add(jm);
-                                            }
-                                            break;
-                                    }
-                                }
-
-                                runOnUiThread(() -> {
-                                    Adapter stateAdapter = new Adapter(getApplicationContext(), R.layout.list_element, arrayList);
-                                    listView.setAdapter(stateAdapter);
-                                    AdapterView.OnItemClickListener itemListener = (parent, v, position, id) -> {
-                                        Intent intent = new Intent(getApplicationContext(), ActivityItem.class);
-
-                                        FlightModel fm;
-                                        if (jm.getType().equals("departure")) {
-                                            switch (jm.getDate()) {
-                                                case "yesterday":
-                                                    fm = jm.getDeparture().getYesterday().get(position);
-                                                    intent.putExtra("flightName", fm.getFlight());
-                                                    intent.putExtra("direction", fm.getDirection());
-                                                    intent.putExtra("type", fm.getType());
-                                                    intent.putExtra("status", fm.getStatus());
-                                                    intent.putExtra("checkin", fm.getCheckin());
-                                                    intent.putExtra("exits", fm.getGate());
-                                                    intent.putExtra("airlineName", fm.getAirlineName());
-                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
-                                                    intent.putExtra("date", fm.getDateTime());
-                                                    break;
-                                                case "today":
-                                                    fm = jm.getDeparture().getToday().get(position);
-                                                    intent.putExtra("flightName", fm.getFlight());
-                                                    intent.putExtra("direction", fm.getDirection());
-                                                    intent.putExtra("type", fm.getType());
-                                                    intent.putExtra("status", fm.getStatus());
-                                                    intent.putExtra("checkin", fm.getCheckin());
-                                                    intent.putExtra("exits", fm.getGate());
-                                                    intent.putExtra("airlineName", fm.getAirlineName());
-                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
-                                                    intent.putExtra("date", fm.getDateTime());
-                                                    break;
-                                                case "tomorrow":
-                                                    fm = jm.getDeparture().getTomorrow().get(position);
-                                                    intent.putExtra("flightName", fm.getFlight());
-                                                    intent.putExtra("direction", fm.getDirection());
-                                                    intent.putExtra("type", fm.getType());
-                                                    intent.putExtra("status", fm.getStatus());
-                                                    intent.putExtra("checkin", fm.getCheckin());
-                                                    intent.putExtra("exits", fm.getGate());
-                                                    intent.putExtra("airlineName", fm.getAirlineName());
-                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
-                                                    intent.putExtra("date", fm.getDateTime());
-                                                    break;
-                                            }
-                                        } else if (jm.getType().equals("arrival")) {
-                                            switch (jm.getDate()) {
-                                                case "yesterday":
-                                                    fm = jm.getArrival().getYesterday().get(position);
-                                                    intent.putExtra("flightName", fm.getFlight());
-                                                    intent.putExtra("direction", fm.getDirection());
-                                                    intent.putExtra("type", fm.getType());
-                                                    intent.putExtra("status", fm.getStatus());
-                                                    intent.putExtra("checkin", fm.getCheckin());
-                                                    intent.putExtra("exits", fm.getGate());
-                                                    intent.putExtra("airlineName", fm.getAirlineName());
-                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
-                                                    intent.putExtra("date", fm.getDateTime());
-                                                    break;
-                                                case "today":
-                                                    fm = jm.getArrival().getToday().get(position);
-                                                    intent.putExtra("flightName", fm.getFlight());
-                                                    intent.putExtra("direction", fm.getDirection());
-                                                    intent.putExtra("type", fm.getType());
-                                                    intent.putExtra("status", fm.getStatus());
-                                                    intent.putExtra("checkin", fm.getCheckin());
-                                                    intent.putExtra("exits", fm.getGate());
-                                                    intent.putExtra("airlineName", fm.getAirlineName());
-                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
-                                                    intent.putExtra("date", fm.getDateTime());
-                                                    break;
-                                                case "tomorrow":
-                                                    fm = jm.getArrival().getTomorrow().get(position);
-                                                    intent.putExtra("flightName", fm.getFlight());
-                                                    intent.putExtra("direction", fm.getDirection());
-                                                    intent.putExtra("type", fm.getType());
-                                                    intent.putExtra("status", fm.getStatus());
-                                                    intent.putExtra("checkin", fm.getCheckin());
-                                                    intent.putExtra("exits", fm.getGate());
-                                                    intent.putExtra("airlineName", fm.getAirlineName());
-                                                    intent.putExtra("airlineLogo", fm.getAirlineLogo());
-                                                    intent.putExtra("date", fm.getDateTime());
-                                                    break;
-                                            }
-                                        }
-                                        startActivity(intent);
-                                    };
-                                    listView.setOnItemClickListener(itemListener);
-                                    ListView listView = findViewById(R.id.recyclerView_flightList);
-                                    ConstraintLayout loadingLayout = findViewById(R.id.loading_layout);
-                                    ConstraintLayout wifiLayout = findViewById(R.id.wifi_err_layout);
-
-                                    listView.setVisibility(View.VISIBLE);
-                                    loadingLayout.setVisibility(View.GONE);
-                                    wifiLayout.setVisibility(View.GONE);
-
-                                });
-                            } else {
-                                runOnUiThread(() -> {
-                                    ListView listView = findViewById(R.id.recyclerView_flightList);
-                                    ConstraintLayout loadingLayout = findViewById(R.id.loading_layout);
-                                    ConstraintLayout wifiLayout = findViewById(R.id.wifi_err_layout);
-                                    ImageView errImg = findViewById(R.id.errorImage);
-                                    TextView errText = findViewById(R.id.errorText);
-
-                                    errImg.setImageDrawable(getResources().getDrawable(R.drawable.error));
-                                    errText.setText("Какие-то проблемы на сервере. Попробуйте позже");
-                                    listView.setVisibility(View.GONE);
-                                    loadingLayout.setVisibility(View.GONE);
-                                    wifiLayout.setVisibility(View.VISIBLE);
-                                });
-                            }
-                        }
-                    }
-                });
+                }
+            }
+        });
         spinnerDates.setEnabled(true);
         spinnerTypes.setEnabled(true);
     }

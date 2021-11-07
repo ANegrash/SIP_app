@@ -81,8 +81,8 @@ public class ActivityItem extends AppCompatActivity {
             case "12" : month = "декабря"; break;
         }
         String[] timePart = date.split("T")[1].split("\\+")[0].split(":");
-        String returnedDate = datePart[2] + " " + month;
-        String returnedTime = timePart[0] + ":" + timePart[1];
+        String returnedDate = Integer.parseInt(datePart[2]) + " " + month;
+        String returnedTime = Integer.parseInt(timePart[0]) + ":" + timePart[1];
         return returnedTime + ", " + returnedDate;
     }
 }
