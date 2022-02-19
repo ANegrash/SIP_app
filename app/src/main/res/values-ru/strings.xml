@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SIP aero</string>
     <string name="main_activity_title">Онлайн-табло</string>
@@ -13,11 +14,7 @@
     <string name="rate">Оцените приложение</string>
     <string name="developer">Разработчик</string>
     <string name="disclaimer">Данное приложение НЕ является официальным</string>
-    <string name="airportPhone" translatable="false">+7 (3652) 59-55-45</string>
-    <string name="airportEmail" translatable="false">office@sipaero.ru</string>
     <string name="airportAddres">Международный Аэропорт Симферополь</string>
-    <string name="devName" translatable="false">NAV apps</string>
-    <string name="devEmail" translatable="false">dev@nav-com.ru</string>
     <string name="yesterday">Вчера</string>
     <string name="today">Сегодня</string>
     <string name="tomorrow">Завтра</string>
@@ -38,8 +35,4 @@
     <string name="october">октября</string>
     <string name="december">декабря</string>
     <string name="november">ноября</string>
-    <string name="fb" translatable="false">https://www.facebook.com/sip.airport</string>
-    <string name="inst" translatable="false">sip_aero</string>
-    <string name="youtube" translatable="false">https://www.youtube.com/channel/UCfjMy6bfOCbzwoyDU9YGL9Q</string>
-    <string name="vk" translatable="false">https://vk.com/sip.airport</string>
 </resources>

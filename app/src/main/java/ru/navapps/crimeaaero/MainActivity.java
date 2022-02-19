@@ -11,6 +11,7 @@ import okhttp3.Response;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,17 +28,18 @@ import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import ru.navapps.crimeaaero.models.FlightModel;
 import ru.navapps.crimeaaero.models.JsonModel;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences prefs = null;
-    String[] datesArray = {"Вчера", "Сегодня", "Завтра"};
+    String[] datesArray = {"", "", ""};
     String[] datesArrayQuery = {"yesterday", "today", "tomorrow"};
     Integer dateVar = 0;
 
-    String[] typesArray = {"Вылет", "Прилёт"};
+    String[] typesArray = {"", ""};
     String[] typesArrayQuery = {"departure", "arrival"};
     Integer typeVar = 0;
     private List<JsonModel> arrayList = new ArrayList();
@@ -50,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
         prefs = getSharedPreferences("ru.navapps.crimeaaero", MODE_PRIVATE);
         int prefsDateVar = prefs.getInt("dateVar", 0);
         int prefsTypeVar = prefs.getInt("typeVar", 0);
+        String currentLocale = Locale.getDefault().getLanguage();
+
+        datesArray[0] = getResources().getString(R.string.yesterday);
+        datesArray[1] = getResources().getString(R.string.today);
+        datesArray[2] = getResources().getString(R.string.tomorrow);
+
+        typesArray[0] = getResources().getString(R.string.departure);
+        typesArray[1] = getResources().getString(R.string.arrival);
+
         if (prefsDateVar != 0)
             dateVar = prefsDateVar;
         if (prefsTypeVar != 0)
@@ -67,13 +78,13 @@ public class MainActivity extends AppCompatActivity {
         loadingLayout.setVisibility(View.VISIBLE);
         wifiLayout.setVisibility(View.GONE);
 
-        ArrayAdapter<String> adapterDates = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datesArray);
-        adapterDates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapterDates = new ArrayAdapter<>(this, R.layout.spinner_item, datesArray);
+        adapterDates.setDropDownViewResource(R.layout.spinner_popup_item);
         spinnerDates.setAdapter(adapterDates);
         spinnerDates.setSelection(dateVar);
 
-        ArrayAdapter<String> adapterTypes = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, typesArray);
-        adapterTypes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapterTypes = new ArrayAdapter<>(this, R.layout.spinner_item, typesArray);
+        adapterTypes.setDropDownViewResource(R.layout.spinner_popup_item);
         spinnerTypes.setAdapter(adapterTypes);
         spinnerTypes.setSelection(typeVar);
 
@@ -81,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             listView.setVisibility(View.GONE);
             loadingLayout.setVisibility(View.VISIBLE);
             wifiLayout.setVisibility(View.GONE);
-            setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar]);
+            setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar], currentLocale);
         });
 
         faqBtn.setOnClickListener(v -> {
@@ -97,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 wifiLayout.setVisibility(View.GONE);
                 dateVar = position;
                 prefs.edit().putInt("dateVar", dateVar).apply();
-                setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar]);
+                setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar], currentLocale);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -114,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 wifiLayout.setVisibility(View.GONE);
                 typeVar = position;
                 prefs.edit().putInt("typeVar", typeVar).apply();
-                setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar]);
+                setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar], currentLocale);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -123,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         };
         spinnerTypes.setOnItemSelectedListener(itemSelectedListenerTypes);
 
-        setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar]);
+        setRecyclerViewContent(typesArrayQuery[typeVar], datesArrayQuery[dateVar], currentLocale);
     }
 
     @Override
@@ -133,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setRecyclerViewContent(
             String type,
-            String date
+            String date,
+            String lang
     ) {
         Spinner spinnerDates = findViewById(R.id.spinner_dates);
         Spinner spinnerTypes = findViewById(R.id.spinner_flightTypes);
@@ -142,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         String url = "https://new.sipaero.ru/json/schedule/?";
         if (!type.equals("")) url += "type=" + type + "&";
         if (!date.equals("")) url += "date=" + date + "&";
-        url += "lang=ru";
+        if (!lang.equals("")) url += "lang=" + lang; else url += "lang=ru";
 
         Get test = new Get();
 
@@ -157,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView errText = findViewById(R.id.errorText);
 
                     errImg.setImageDrawable(getResources().getDrawable(R.drawable.nowifi));
-                    errText.setText("Проблемы с соединением");
+                    errText.setText(getResources().getString(R.string.connectionError));
                     listView.setVisibility(View.GONE);
                     loadingLayout.setVisibility(View.GONE);
                     wifiLayout.setVisibility(View.VISIBLE);
@@ -321,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
                                 TextView errText = findViewById(R.id.errorText);
 
                                 errImg.setImageDrawable(getResources().getDrawable(R.drawable.error));
-                                errText.setText("Какие-то проблемы на сервере. Попробуйте позже");
+                                errText.setText(getResources().getString(R.string.serverError));
                                 listView.setVisibility(View.GONE);
                                 loadingLayout.setVisibility(View.GONE);
                                 wifiLayout.setVisibility(View.VISIBLE);
@@ -336,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
                             TextView errText = findViewById(R.id.errorText);
 
                             errImg.setImageDrawable(getResources().getDrawable(R.drawable.error));
-                            errText.setText("Какие-то проблемы на сервере. Попробуйте позже");
+                            errText.setText(getResources().getString(R.string.serverError));
                             listView.setVisibility(View.GONE);
                             loadingLayout.setVisibility(View.GONE);
                             wifiLayout.setVisibility(View.VISIBLE);
