@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SIP aero</string>
+    <string name="main_activity_title">Flight table</string>
+    <string name="direction">Direction:</string>
+    <string name="day">Day:</string>
+    <string name="reception_desks">Check-in desks:</string>
+    <string name="exit">Gate:</string>
+    <string name="plan_date">Date:</string>
+    <string name="company">Aircompany:</string>
+    <string name="version">version 1.2(4) from 19.02.2022</string>
+    <string name="information">Information</string>
+    <string name="airport">Airport</string>
+    <string name="rate">Rate app</string>
+    <string name="developer">Developer</string>
+    <string name="disclaimer">This app is NOT official</string>
+    <string name="airportAddres">Mezhdunarodnyy Aeroport Simferopol\'</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="departure">Departure</string>
+    <string name="arrival">Arrival</string>
+    <string name="connectionError">Connection problems</string>
+    <string name="serverError">Server problems. Try again later</string>
+    <string name="simferopol">Simferopol</string>
+    <string name="november">november</string>
+    <string name="december">december</string>
+    <string name="october">october</string>
+    <string name="september">september</string>
+    <string name="august">august</string>
+    <string name="july">july</string>
+    <string name="june">june</string>
+    <string name="may">may</string>
+    <string name="april">april</string>
+    <string name="march">march</string>
+    <string name="february">february</string>
+    <string name="january">january</string>
+</resources>

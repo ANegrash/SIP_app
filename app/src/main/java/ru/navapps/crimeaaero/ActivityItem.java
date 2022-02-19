@@ -30,7 +30,7 @@ public class ActivityItem extends AppCompatActivity {
 
         backBtn.setOnClickListener(view -> finish());
 
-        String sip = "Симферополь";
+        String sip = getResources().getString(R.string.simferopol);
         String flightName = intent.getStringExtra("flightName");
         String direction = intent.getStringExtra("direction");
         String type = intent.getStringExtra("type");
@@ -67,18 +67,18 @@ public class ActivityItem extends AppCompatActivity {
         String[] datePart = date.split("T")[0].split("-");
         String month = "";
         switch (datePart[1]){
-            case "01" : month = "января"; break;
-            case "02" : month = "февраля"; break;
-            case "03" : month = "марта"; break;
-            case "04" : month = "апреля"; break;
-            case "05" : month = "мая"; break;
-            case "06" : month = "июня"; break;
-            case "07" : month = "июля"; break;
-            case "08" : month = "августа"; break;
-            case "09" : month = "сентября"; break;
-            case "10" : month = "октября"; break;
-            case "11" : month = "ноября"; break;
-            case "12" : month = "декабря"; break;
+            case "01" : month = getResources().getString(R.string.january); break;
+            case "02" : month = getResources().getString(R.string.february); break;
+            case "03" : month = getResources().getString(R.string.march); break;
+            case "04" : month = getResources().getString(R.string.april); break;
+            case "05" : month = getResources().getString(R.string.may); break;
+            case "06" : month = getResources().getString(R.string.june); break;
+            case "07" : month = getResources().getString(R.string.july); break;
+            case "08" : month = getResources().getString(R.string.august); break;
+            case "09" : month = getResources().getString(R.string.september); break;
+            case "10" : month = getResources().getString(R.string.october); break;
+            case "11" : month = getResources().getString(R.string.november); break;
+            case "12" : month = getResources().getString(R.string.december); break;
         }
         String[] timePart = date.split("T")[1].split("\\+")[0].split(":");
         String returnedDate = Integer.parseInt(datePart[2]) + " " + month;
